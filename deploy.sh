@@ -111,6 +111,11 @@ echo "✅ .env dikonfigurasi."
 echo "📦 Install dependency Laravel..."
 sudo -u "$USER_BARU" composer install --no-interaction --prefer-dist
 
+# =============== PERBAIKI IZIN .env ====================
+echo "🔒 Mengatur permission .env..."
+sudo chown "$USER_BARU":www-data .env
+sudo chmod 664 .env
+
 # =============== LARAVEL APP KEY ========================
 echo "🔑 Generate APP_KEY..."
 sudo -u "$USER_BARU" php artisan key:generate
