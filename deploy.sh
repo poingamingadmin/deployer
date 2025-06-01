@@ -128,11 +128,7 @@ sudo find storage -type d -exec chmod 775 {} \;
 sudo find bootstrap/cache -type d -exec chmod 775 {} \;
 
 # =============== NGINX CONFIG ===========================
-echo "🧹 Hapus default Nginx config..."
-sudo rm -f /etc/nginx/sites-available/default
-sudo rm -f /etc/nginx/sites-enabled/default
-
-echo "📝 Menulis konfigurasi Nginx baru..."
+echo "🧹 Menulis ulang konfigurasi Nginx..."
 sudo tee /etc/nginx/sites-available/default >/dev/null <<EOL
 server {
     listen 80 default_server;
@@ -159,6 +155,12 @@ server {
     }
 }
 EOL
+
+# 🔗 Pastikan link-nya aktif
+sudo ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+
+# ✅ Uji konfigurasi Nginx sebelum restart
+sudo nginx -t
 
 # =============== RESTART SERVICE ========================
 echo "🔁 Restart semua service..."
