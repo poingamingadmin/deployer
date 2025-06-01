@@ -118,7 +118,7 @@ sudo chmod 664 .env
 
 # =============== LARAVEL APP KEY ========================
 echo "🔑 Generate APP_KEY..."
-sudo -u "$USER_BARU" php artisan key:generate
+sudo -u "$USER_BARU" php artisan key:generate --force
 
 # =============== PERMISSION =============================
 echo "📂 Set permission folder Laravel..."
