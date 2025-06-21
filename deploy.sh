@@ -22,6 +22,14 @@ for var in "${REQUIRED_VARS[@]}"; do
     fi
 done
 
+export DEBIAN_FRONTEND=noninteractive
+export NEEDRESTART_MODE=a
+
+apt-get update -y
+apt-get upgrade -y \
+  -o Dpkg::Options::="--force-confdef" \
+  -o Dpkg::Options::="--force-confold"
+
 # =============== USER SETUP ==========================
 echo "📦 Mengecek user..."
 if id "$USER_BARU" &>/dev/null; then
