@@ -12,8 +12,14 @@ echo "=== Tambahkan $LARAVEL_USER ke grup sudo dan www-data ==="
 usermod -aG sudo $LARAVEL_USER
 usermod -aG www-data $LARAVEL_USER
 
-echo "=== Update & Install Software ==="
-apt update && apt upgrade -y
+echo "=== Update & Upgrade Ubuntu (Non-Interactive) ==="
+export DEBIAN_FRONTEND=noninteractive
+apt update
+apt -o Dpkg::Options::="--force-confdef" \
+    -o Dpkg::Options::="--force-confold" \
+    upgrade -yq
+
+echo "=== Tambah PPA PHP ==="
 add-apt-repository ppa:ondrej/php -y
 apt update
 
