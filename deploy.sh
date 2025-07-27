@@ -24,7 +24,7 @@ add-apt-repository ppa:ondrej/php -y
 apt update
 
 echo "=== Install PHP & Extensions ==="
-apt install -y php${PHP_VERSION} php${PHP_VERSION}-cli php${PHP_VERSION}-mbstring php${PHP_VERSION}-xml php${PHP_VERSION}-bcmath php${PHP_VERSION}-curl php${PHP_VERSION}-zip php${PHP_VERSION}-mysql php${PHP_VERSION}-redis php${PHP_VERSION}-fpm unzip nginx mysql-server git curl
+apt install -y php${PHP_VERSION} php${PHP_VERSION}-cli php${PHP_VERSION}-mbstring php${PHP_VERSION}-xml php${PHP_VERSION}-bcmath php${PHP_VERSION}-gd php${PHP_VERSION}-curl php${PHP_VERSION}-zip php${PHP_VERSION}-mysql php${PHP_VERSION}-redis php${PHP_VERSION}-fpm unzip nginx mysql-server git curl
 
 echo "=== Install Node.js & npm (untuk Laravel Vite, Tailwind, dll) ==="
 curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
