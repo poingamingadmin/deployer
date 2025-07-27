@@ -34,10 +34,6 @@ echo "=== Install Composer ==="
 curl -sS https://getcomposer.org/installer | php
 mv composer.phar /usr/local/bin/composer
 
-echo "=== Set Permissions ==="
-chown -R www-data:www-data $APP_PATH
-chmod -R 775 ${APP_PATH}/storage ${APP_PATH}/bootstrap/cache
-
 echo "=== Setup Nginx ==="
 cat > /etc/nginx/sites-available/laravel <<EOF
 server {
