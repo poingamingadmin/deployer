@@ -34,10 +34,6 @@ echo "=== Install Composer ==="
 curl -sS https://getcomposer.org/installer | php
 mv composer.phar /usr/local/bin/composer
 
-echo "=== Deploy Laravel App ==="
-cd $APP_PATH
-composer install --no-interaction --prefer-dist --optimize-autoloader
-
 echo "=== Set Permissions ==="
 chown -R www-data:www-data $APP_PATH
 chmod -R 775 ${APP_PATH}/storage ${APP_PATH}/bootstrap/cache
