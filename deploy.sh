@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # === Konfigurasi ===
-LARAVEL_USER="laraveluser"
+LARAVEL_USER="kmzwayxx"
 APP_PATH="/var/www/html"
 PHP_VERSION="8.3"
 
