@@ -34,25 +34,26 @@ echo "=== Install Nginx ==="
 apt install -y nginx certbot python3-certbot-nginx
  
 echo "=== Setup Nginx ==="
-cat > /etc/nginx/sites-available/default <<EOF
+cat > /etc/nginx/sites-available/default <<'EOF'
 server {
-    listen 80;
+    listen 80 default_server;
+    listen [::]:80 default_server;
     server_name _;
 
-    root ${APP_PATH}/public;
+    root /var/www/html/public;
     index index.php index.html;
 
     add_header X-Frame-Options "SAMEORIGIN";
     add_header X-Content-Type-Options "nosniff";
 
     location / {
-        try_files \$uri \$uri/ /index.php?\$query_string;
+        try_files $uri $uri/ /index.php?$query_string;
     }
 
-    location ~ \.php\$ {
+    location ~ \.php$ {
         include snippets/fastcgi-php.conf;
-        fastcgi_pass unix:/run/php/php${PHP_VERSION}-fpm.sock;
-        fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
+        fastcgi_pass unix:/run/php/php8.3-fpm.sock;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
         include fastcgi_params;
     }
 
@@ -61,6 +62,8 @@ server {
     }
 }
 EOF
+
+nginx -t && systemctl reload nginx
 
 ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
 nginx -t && systemctl reload nginx
