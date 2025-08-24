@@ -74,4 +74,29 @@ systemctl restart nginx
 systemctl enable php${PHP_VERSION}-fpm
 systemctl enable nginx
 
+#!/bin/bash
+set -e
+
+echo "=== Update packages ==="
+sudo apt update
+
+echo "=== Install Redis ==="
+sudo apt install -y redis-server
+
+echo "=== Configure Redis supervised mode ==="
+sudo sed -i 's/^supervised .*/supervised systemd/' /etc/redis/redis.conf
+
+echo "=== Configure Redis bind and password ==="
+sudo sed -i 's/^bind .*/bind 0.0.0.0/' /etc/redis/redis.conf
+sudo sed -i "s/^# requirepass .*/requirepass kmzwayxx/" /etc/redis/redis.conf
+
+echo "=== Restart Redis service ==="
+sudo systemctl restart redis-server
+
+echo "=== Enable Redis on boot ==="
+sudo systemctl enable redis-server
+
+echo "=== Test Redis with password ==="
+redis-cli -a kmzwayxx ping
+
 echo "=== Laravel Setup Completed at ${APP_PATH} ==="
